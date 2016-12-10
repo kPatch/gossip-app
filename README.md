@@ -51,7 +51,29 @@ the latency of sending the messages - it could be linear (order N)
 Use a Spanning Tree
 
 ### Gossip Implementation
-Lorem Ipsum
+
+**Single Multicast Message - Push Gossip Protocol**
+
+- There's a group of nodes, let this be the multicast group
+- You have a single multicast sender
+- There is a single multicast message that we want to send
+- We want to get the multicast message across all nodes
+
+**Algorithm**
+- Periodically (i.e. 5 seconds or 10 seconds) send the message to *b* random target nodes
+    - *b* is known as the Gossip Fanout 
+    - It is possible that the same random target(s) will be chosen and that nodes will receive multiple copies of the same message
+- Send the message over [UDP](https://en.wikipedia.org/wiki/User_Datagram_Protocol). This message is be known as the **gossip message**. 
+- Once a receiver receives a gossip, it becomes infected and does the same - periodically it sends
+the message to a randomly selected group of nodes
+
+**NOTE:**
+- The gossip protocol is not synchronized across all the nodes. Different nodes run at different periods.
+- There are other version, such as a Pull Gossip and a hybrid variant: Push-Pull
+
+### Resources
+
+- [Gossip Algorithms - MIT](http://web.mit.edu/devavrat/www/GossipBook.pdf)
 
 #BUILD
 
