@@ -1,9 +1,9 @@
 # Gossiper
-Quick implementation of the gossip protocol
+Quick implementation of a [Gossip protocol](https://en.wikipedia.org/wiki/Gossip_protocol)
 
 ##BUILD
 
-Gossip Impl is built using Gradle. To build Gossipl impl and its example programs run:
+Gossiper is built using Gradle. To build Gossiper and its example programs run:
 
 ```Bash
 gradle build
