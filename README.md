@@ -53,7 +53,7 @@ Use a Spanning Tree
 ### Gossip Implementation
 Lorem Ipsum
 
-##BUILD
+#BUILD
 
 Gossiper is built using Gradle. To build Gossiper and its example programs run:
 
