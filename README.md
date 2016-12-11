@@ -1,5 +1,6 @@
 # Gossiper
-A simple implementation of a [Gossip protocol](https://en.wikipedia.org/wiki/Gossip_protocol)
+A simple implementation of [Gossip-Style](https://en.wikipedia.org/wiki/Gossip_protocol) Membership, that implements 
+failure detection.
 
 ## The Story
 You have just recently joined a secret invite-only club. Everyday the club meets in a large and dark room. 
@@ -17,7 +18,7 @@ And the gossips begins...
 - [About Gossip](#about-gossip)
     - [Background](#background)
         - [Multicast](#multicast)
-    - [Gossip Implementation](#)
+    - [Gossip-Style Membership Implementation](#)
 - [Build](#build)
 - [Usage](#usage)
 
@@ -61,7 +62,36 @@ the latency of sending the messages - it could be linear (order N)
 
 Use a Spanning Tree
 
-### Gossip Implementation
+### Gossip-Style Membership Implementation
+
+We start off with the same notion as other membership protocols: every process (node) wants to send it's heartbeat to other 
+processes - hearbeats are indicative of a process's liveliness. 
+
+These hearbeats are sequenced numbers that are incremented locally. Processes timeout waiting for heartbeats and mark 
+the corresponding processes as failed, i.e. t_timeout can be 10 seconds.
+
+Every process maintains a table containing entries of neighboring processes and their heartbeats - this table is known as
+a process's **membership list**. 
+
+Periodically each process sends its membership list to **N** of its neighbors, which are
+selected at random. This is known as a **gossip**, essentially each process gossips its membership list. The receiver 
+of the membership list then merges and updates it's own membership to contain the latest heartbeat, as shown in the 
+diagram below.
+
+Once a process times out it is not immediately deleted, it is rather marked as dead or placed in a queue of dead processes 
+for t_cleanup seconds. This helps avoid the case where a dead process might never go away because another process might 
+ think it's a new process.
+ 
+ **Further explanation:**
+Consider the following case where we immediately remove failed(dead) processes...
+
+Say we have two processes, p1 an p2. 
+
+- Process p2 considers the third entry in it's membership table to be failed, say process p3, and removes it right away. 
+- As soon as a this occurs, p1 gossips its membership to p2 and within this list is  process p3.
+- Following the established protocol, p2 then add p3 again and updates it's heartbeat to the latest heartbeat.
+p3 times out again and the whole process can occur all over again, hence never removing p3 from the membership list.
+
 
 ### Single Multicast Message - Push Gossip Protocol
 

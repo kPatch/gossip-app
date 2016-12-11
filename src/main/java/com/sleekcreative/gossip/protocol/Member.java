@@ -1,4 +1,4 @@
-package com.sleekcreative.gossip.app.model;
+package com.sleekcreative.gossip.protocol;
 
 /**
  * Created by kpatch on 12/10/16.
