@@ -8,9 +8,9 @@ side chat or gossips spread across nearby members - who then spread these gossip
 
 Your friend Alice has just brought you into the club.
 
-> "Hey, did you hear Alice brought Bob into the club?"
+> "Hey, did you hear Alice brought Bob into the club?"... Carl whispers to his fellow neighboring members. 
 
-... Carl whispers to his fellow neighboring members. And the gossips begins...
+And the gossips begins...
 
 ## Table of Contents
 
