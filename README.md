@@ -63,7 +63,7 @@ processes. Hearbeats are indicative of a process's liveliness.
 These hearbeats are sequenced numbers that are incremented locally. 
 
 Processes timeout waiting for other processes' heartbeats and mark the corresponding processes as failed, 
-i.e. *t_timeout* can be 10 seconds - meaning after not hearing a process's heart for 10 we mark it as failed
+i.e. *t_timeout* can be 10 seconds - meaning that after not hearing a process's heart for 10 seconds it is marked as failed
 
 Every process maintains a table containing entries of neighboring processes and their heartbeats - this table is known as
 a process's **membership list**. 
@@ -72,7 +72,7 @@ Periodically each process sends its membership list to **N** of its neighbors, w
 This is known as a **gossip**, essentially each process gossips its membership list. The receiver of the membership list 
 then merges and updates it's own membership to contain the latest heartbeat, as shown in the diagram below.
 
-Once a process times out, and is declared failed/dead, it is not immediately deleted. It is rather *marked* as dead or 
+When a process times out, and is declared failed/dead, it is not immediately deleted. It is rather *marked* as dead or 
 placed in a queue of dead processes. These dead processes are then cleaned after *t_cleanup* seconds. 
 The latter helps avoid the case where a dead process might never go away because another process might share the dead
 process again and would be consider a new process if we don't already have it in our membership list.
@@ -83,9 +83,9 @@ Consider the following case where we immediately remove failed(dead) processes..
 Say we have two processes, *p1* an *p2*. 
 
 - Process *p2* considers the third entry in it's membership table to be failed, say process *p3*, and removes it right away. 
-- As soon as a this occurs, *p1* gossips its membership list to *p2* and within this list is process *p3*.
-- Following the protocol, *p2* then compares it's own membership list and notices that it does not contain *p3*. Hence,
- by rules of the protocol, *p2* adds *p3* to its membership lists and updates it's heartbeat to the latest heartbeat.
+- As soon as a this occurs it just so happens that *p1* gossips its membership list to *p2*. And within this list is process *p3*.
+- Following the protocol, *p2* compares it's own membership list and notices that it does not contain *p3*. Hence,
+ by rules of the protocol, *p2* adds *p3* to its membership list and updates *p3*'s heartbeat to the latest heartbeat.
 - *p3* times out again and the whole process can occur all over again, hence never removing *p3* from the membership list.
 
 #### Single Multicast Message - Push Gossip Protocol
