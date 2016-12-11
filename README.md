@@ -85,7 +85,7 @@ Say we have two processes, *p1* an *p2*.
 - Process *p2* considers the third entry in it's membership table to be failed, say process *p3*, and removes it right away. 
 - As soon as a this occurs it just so happens that *p1* gossips its membership list to *p2*. And within this list is process *p3*.
 - Following the protocol, *p2* compares it's own membership list and notices that it does not contain *p3*. Hence,
- by rules of the protocol, *p2* adds *p3* to its membership list and updates *p3*'s heartbeat to the latest heartbeat.
+ by rules of the protocol, *p2* adds *p3* to its membership list and updates *p3*'s  heartbeat to the latest heartbeat.
 - *p3* times out again and the whole process can occur all over again, hence never removing *p3* from the membership list.
 
 #### Single Multicast Message - Push Gossip Protocol
