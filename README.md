@@ -1,6 +1,17 @@
 # Gossiper
 A simple implementation of a [Gossip protocol](https://en.wikipedia.org/wiki/Gossip_protocol)
 
+## The Story
+You have just recently joined a secret invite-only club. Everyday the club meets in a large and dark room. 
+The club is big, and the only way that others get to know about new members (or even hear about new members) is through 
+side chat or gossips spread across nearby members - who then spread these gossips to their neighbors as well. 
+
+Your friend Alice has just brought you into the club.
+
+> "Hey, did you hear Alice brought Bob into the club?"
+
+... Carl whispers to his fellow neighboring members. And the gossips begins...
+
 ## Table of Contents
 
 - [About Gossip](#about-gossip)
@@ -52,14 +63,14 @@ Use a Spanning Tree
 
 ### Gossip Implementation
 
-**Single Multicast Message - Push Gossip Protocol**
+### Single Multicast Message - Push Gossip Protocol
 
 - There's a group of nodes, let this be the multicast group
 - You have a single multicast sender
 - There is a single multicast message that we want to send
 - We want to get the multicast message across all nodes
 
-**Algorithm**
+#### Algorithm
 - Periodically (i.e. 5 seconds or 10 seconds) send the message to *b* random target nodes
     - *b* is known as the Gossip Fanout 
     - It is possible that the same random target(s) will be chosen and that nodes will receive multiple copies of the same message
@@ -67,7 +78,7 @@ Use a Spanning Tree
 - Once a receiver receives a gossip, it becomes infected and does the same - periodically it sends
 the message to a randomly selected group of nodes
 
-**NOTE:**
+#### NOTE:
 - The gossip protocol is not synchronized across all the nodes. Different nodes run at different periods.
 - There are other version, such as a Pull Gossip and a hybrid variant: Push-Pull
 
@@ -80,7 +91,7 @@ the message to a randomly selected group of nodes
 Gossiper is built using Gradle. To build Gossiper and its example programs run:
 
 ```Bash
-gradle build
+$ gradle build
 ```
 
 #USAGE
